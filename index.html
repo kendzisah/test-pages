@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en-US">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#8936FF">
+    <title>Test-image-type</title>
+    <link rel="manifest" href="manifest.json">
+</head>
+<body>
+    <h1>Test-image-type PWA</h1>
+    <p>This is a basic Progressive Web App with image type testing functionality.</p>
+    
+    <div id="status">
+        <p>Service Worker Status: <span id="sw-status">Not registered</span></p>
+    </div>
+
+    <script>
+        // Register service worker
+        if ('serviceWorker' in navigator) {
+            window.addEventListener('load', () => {
+                navigator.serviceWorker.register('/sw.js')
+                    .then(registration => {
+                        console.log('Service Worker registered:', registration);
+                        document.getElementById('sw-status').textContent = 'Registered';
+                        document.getElementById('sw-status').style.color = 'green';
+                    })
+                    .catch(error => {
+                        console.error('Service Worker registration failed:', error);
+                        document.getElementById('sw-status').textContent = 'Registration failed';
+                        document.getElementById('sw-status').style.color = 'red';
+                    });
+            });
+        } else {
+            document.getElementById('sw-status').textContent = 'Not supported';
+            document.getElementById('sw-status').style.color = 'orange';
+        }
+    </script>
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #2EC6FE;
+            color: #333;
+        }
+        
+        h1 {
+            color: #8936FF;
+        }
+        
+        #status {
+            margin-top: 20px;
+            padding: 15px;
+            background-color: white;
+            border-radius: 5px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+    </style>
+</body>
+</html>
